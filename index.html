@@ -50,33 +50,25 @@
     <p class="message">正在驗證身份，請稍候...</p>
     <p class="error" id="errorMsg"></p>
   </div>
-
   <script>
-    const LIFF_ID = "2009615216-nTltfb3R";
+    const LIFF_ID = "2009615216-EPrFd1Vu";
     const TALLY_URL = "https://tally.so/r/44Lv2X";
-
     async function init() {
       try {
         await liff.init({ liffId: LIFF_ID });
-
         if (!liff.isLoggedIn()) {
           liff.login();
           return;
         }
-
         const profile = await liff.getProfile();
         const userId = profile.userId;
-
-        // 跳轉到 Tally 表單，帶上 lineUserId 參數
         window.location.href = `${TALLY_URL}?lineUserId=${userId}`;
-
       } catch (err) {
         document.querySelector('.spinner').style.display = 'none';
         document.querySelector('.message').textContent = '發生錯誤，請重新整理';
         document.getElementById('errorMsg').textContent = err.message || '未知錯誤';
       }
     }
-
     init();
   </script>
 </body>
